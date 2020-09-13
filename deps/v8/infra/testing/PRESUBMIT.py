@@ -30,6 +30,7 @@ SUPPORTED_SWARMING_DIMENSIONS = [
   'device_os',
   'device_type',
   'os',
+  'pool',
 ]
 
 # This is not an exhaustive list. It only reflects what we currently use. If
@@ -169,7 +170,7 @@ def _check_test_spec(file_path, raw_pyl):
 
 def CheckChangeOnCommit(input_api, output_api):
   def file_filter(regexp):
-    return lambda f: input_api.FilterSourceFile(f, white_list=(regexp,))
+    return lambda f: input_api.FilterSourceFile(f, files_to_check=(regexp,))
 
   # Calculate which files are affected.
   if input_api.AffectedFiles(False, file_filter(r'.*PRESUBMIT\.py')):
